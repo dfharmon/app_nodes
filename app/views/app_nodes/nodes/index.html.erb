@@ -1,0 +1,37 @@
+
+<%= javascript_include_tag 'app_nodes/application' %>
+<%= stylesheet_link_tag 'app_nodes/application' %>
+<%= javascript_include_tag 'dataTables/bootstrap/3/jquery.dataTables.bootstrap' if AppNodes.bootstrap_datatables %>
+<%= stylesheet_link_tag 'dataTables/bootstrap/3/jquery.dataTables.bootstrap' if AppNodes.bootstrap_datatables %>
+
+<p id="notice"><%= notice %></p>
+
+<h1>Application Nodes</h1>
+
+<table id='nodes_list'>
+  <thead>
+    <tr>
+      <th>Address</th>
+      <th>Name</th>
+      <th>Version</th>
+      <th>Extended Info</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nodes.each do |node| %>
+      <tr>
+        <td><%= node.address %></td>
+        <td><%= node.name %></td>
+        <td><%= node.version %></td>
+        <td><%=raw hash_to_html(node.extended_info) %></td>
+        <td><%= link_to 'Destroy', node, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Node', new_node_path if AppNodes.manual_add_allowed %>
