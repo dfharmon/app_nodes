@@ -12,14 +12,17 @@ module AppNodes
       end
     end
 
-    config.after_initialize do
-      sysinfo = ::SysInfo.new
-      name = sysinfo.hostname
-      node = Node.find_or_initialize_by(name: name)
-      node.address = sysinfo.ipaddress_internal
-      node.version = Rails.application&.version
-      node.extended_info = Rails.application&.extended_info
-      node.save
+    # Only do this after the migration has been run
+    if defined?(AppNodes::Node)
+      config.after_initialize do
+        sysinfo = ::SysInfo.new
+        name = sysinfo.hostname
+        node = Node.find_or_initialize_by(name: name)
+        node.address = sysinfo.ipaddress_internal
+        node.version = Rails.application&.version
+        node.extended_info = Rails.application&.extended_info
+        node.save
+      end
     end
   end
 
