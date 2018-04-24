@@ -3,7 +3,7 @@ PATH
   specs:
     app_nodes (0.0.1)
       jquery-datatables-rails
-      rails (~> 4.2.0)
+      rails
       sysinfo
 
 GEM
