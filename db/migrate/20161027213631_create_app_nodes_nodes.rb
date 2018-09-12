@@ -1,4 +1,4 @@
-class CreateAppNodesNodes < ActiveRecord::Migration
+class CreateAppNodesNodes < ActiveRecord::Migration[4.2]
   def change
     create_table :app_nodes_nodes do |t|
       t.string :address
